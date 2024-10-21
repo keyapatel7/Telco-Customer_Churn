@@ -21,7 +21,7 @@ from sklearn.tree import DecisionTreeClassifier
 from imblearn.combine import SMOTEENN
 
 ## Steps in the Project
-- Data Loading and Exploration
+1.Data Loading and Exploration
 Loaded the dataset using pandas.
 Displayed the first few rows to understand the structure of the data.
 Analyzed the dataset's shape, column names, and data types.
@@ -100,7 +100,7 @@ import pickle
 filename = 'model.sav'
 pickle.dump(model_rf_smote, open(filename, 'wb'))
 
-# To load the model:
+## To load the model:
 load_model = pickle.load(open(filename, 'rb'))
 
 ## Insights
