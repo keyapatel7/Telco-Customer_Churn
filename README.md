@@ -63,29 +63,37 @@ from imblearn.combine import SMOTEENN
    X_resampled, y_resampled = sm.fit_sample(x, y)
    xr_train, xr_test, yr_train, yr_test = train_test_split(X_resampled, y_resampled, test_size=0.2)
 
-
+``` 
 ## Model Building
-### Built two models:
 
-  - Decision Tree Classifier: Achieved an accuracy of 78.18% before balancing, and 93.44% after applying SMOTEENN.
+### Built Two Models:
+1. **Decision Tree Classifier**: 
+   - Achieved an accuracy of **78.18%** before balancing, and **93.44%** after applying SMOTEENN.
+   - **Parameters**:
+     ```python
+     DecisionTreeClassifier(criterion="gini", random_state=100, max_depth=6, min_samples_leaf=8)
+     ```
 
-Parameters:
-
-DecisionTreeClassifier(criterion="gini", random_state=100, max_depth=6, min_samples_leaf=8)
-Random Forest Classifier: Achieved an accuracy of 79.53% before balancing, and 94.27% after applying SMOTEENN.
-
-Parameters:
-RandomForestClassifier(n_estimators=100, criterion='gini', random_state=100, max_depth=6, min_samples_leaf=8)
+2. **Random Forest Classifier**: 
+   - Achieved an accuracy of **79.53%** before balancing, and **94.27%** after applying SMOTEENN.
+   - **Parameters**:
+     ```python
+     RandomForestClassifier(n_estimators=100, criterion='gini', random_state=100, max_depth=6, min_samples_leaf=8)
+     ```
 
 ## Performance Evaluation
-### Before SMOTEENN (Random Forest Classifier)
-Accuracy: 79.53%
-Precision, Recall, F1-Score for class 1 (Churned): 0.69, 0.45, 0.55
-### After SMOTEENN (Random Forest Classifier)
-Accuracy: 94.27%
-### Precision, Recall, F1-Score for class 1 (Churned): 0.94, 0.96, 0.95
 
+### Before SMOTEENN (Random Forest Classifier)
+- **Accuracy**: 79.53%
+- **Precision, Recall, F1-Score for Class 1 (Churned)**: 0.69, 0.45, 0.55
+
+### After SMOTEENN (Random Forest Classifier)
+- **Accuracy**: 94.27%
+- **Precision, Recall, F1-Score for Class 1 (Churned)**: 0.94, 0.96, 0.95
+
+```python
 print(metrics.classification_report(yr_test1, yr_predict1))
+```
 ### Confusion Matrix after applying SMOTEENN:
 
 [[478  40]
@@ -94,21 +102,24 @@ print(metrics.classification_report(yr_test1, yr_predict1))
 ## Dimensionality Reduction with PCA
 PCA was applied to reduce the number of features and retain 90% of the variance. However, applying PCA did not improve the performance. Accuracy after PCA was around 72.39%, which was lower than without PCA.
 
+```python
 from sklearn.decomposition import PCA
 pca = PCA(0.9)
 xr_train_pca = pca.fit_transform(xr_train1)
 xr_test_pca = pca.transform(xr_test1)
-
+```
 ## Saving the Model
 The final model (Random Forest with SMOTEENN) was saved using the pickle library so it can be accessed later via APIs.
+```python
 import pickle
 filename = 'model.sav'
 pickle.dump(model_rf_smote, open(filename, 'wb'))
-
+```
 ## To load the model:
 load_model = pickle.load(open(filename, 'rb'))
 
 ## Insights
-Customers with month-to-month contracts, those without dependents, and those using paperless billing are more likely to churn.
-Churn rate is higher among customers with fiber optic service as compared to DSL.
-Senior citizens are more likely to churn than non-senior citizens.
+- Customers with month-to-month contracts, those without dependents, and those using paperless billing are more likely to churn.
+- Churn rate is higher among customers with fiber optic service as compared to DSL.
+- Senior citizens are more likely to churn than non-senior citizens.
+- Finalised model is Random Forest Classifier.
