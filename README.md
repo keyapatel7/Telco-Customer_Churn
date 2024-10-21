@@ -1,5 +1,5 @@
 # Telco-Customer_Churn
-Project Overview
+## Project Overview
 This project aims to analyze customer churn in a telecom company using a publicly available dataset. The analysis explores various factors that influence customer churn, and the insights are used to build predictive models. Customer churn refers to when customers stop using a company's service. The dataset contains information about customer demographics, services they subscribe to, contract details, payment methods, tenure, and whether they churned.
 
 Dataset Information
